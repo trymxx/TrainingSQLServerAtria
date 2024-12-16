@@ -47,4 +47,27 @@ FROM
 	SalesCTE, MaxSalesCTE
 	
 2.Buatlah sebuah query untuk menghitung total penjualan per karyawan, termasuk hanya karyawan yang memiliki penjualan lebih besar dari rata-rata semua penjualan.
-
+WITH TableSales AS(SELECT 
+	tot.EmployeeID, 
+	emp.Name,
+	SUM(tot.SaleAmount)TotalPenjualan
+FROM 
+	training.dbo.EmployeeSales tot
+LEFT JOIN
+	training.dbo.SalesEmployees emp ON tot.EmployeeID = emp.EmployeeID
+GROUP BY 
+	tot.EMployeeID
+	,emp.Name),
+TableAVG AS (SELECT
+				AVG(TotalPenjualan)avgpen
+			FROM
+				TableSales)
+SELECT
+	EmployeeID
+	,Name
+	,TotalPenjualan
+	,avgpen
+FROM
+	TableSales,TableAVG
+WHERE 
+	TotalPenjualan>avgpen

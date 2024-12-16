@@ -16,12 +16,6 @@ Bulan
 Total Penjualan Bulanan
 Indikasi apakah bulan tersebut memiliki penjualan tertinggi ("Ya" atau "Tidak").
 
-SELECT 
-	SaleID, 
-	SaleDate, 
-	Amount
-FROM 
-	training.dbo.Sales;
 
 WITH SalesCTE AS(
 	SELECT 
